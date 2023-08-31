@@ -1,0 +1,16 @@
+function doGet() {
+  var template = HtmlService.createTemplateFromFile('contact');
+  template.data = {};
+  return template.evaluate();
+}
+function submitFormData(formData) {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  sheet.appendRow([new Date(), formData.Name, formData.Email, formData.Message]);
+ 
+  const email = "PUT YOUR EMAIL";
+  const subject = "Contact Form Submission";
+  const message = "Name: " + formData.Name + "\n" +
+                  "Email: " + formData.Email + "\n" +
+                  "Message: " + formData.Message;
+  MailApp.sendEmail(email, subject, message);
+}

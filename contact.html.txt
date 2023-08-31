@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="contact form example">
+
+  <title> SDT - Contact Form Example</title>
+
+    <!-- Add Material Design CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+  </head>
+
+  <body>
+
+    <form id="contact-form" class="container">
+
+      <h4 class="center-align">Contact Form</h4>
+
+      <div class="input-field">
+
+        <input type="text" id="name" name="Name" required>
+
+        <label for="name">Name</label>
+
+      </div>
+
+      <div class="input-field">
+
+        <input type="email" id="email" name="Email" required>
+
+        <label for="email">Email</label>
+
+      </div>
+
+      <div class="input-field">
+
+        <textarea id="message" class="materialize-textarea" name="Message" required></textarea>
+
+        <label for="message">Message</label>
+
+      </div>
+
+      <div class="center-align">
+
+        <input type="submit" class="btn waves-effect waves-light" value="Submit">
+
+      </div>
+
+    </form>
+
+ <script>
+
+      const form = document.querySelector("#contact-form");
+
+      form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+       
+
+        const name = form.elements.Name.value;
+
+        const email = form.elements.Email.value;
+
+        let message = form.elements.Message.value;
+
+
+        message = message.replace(/</g, "&lt;").replace(/>/g, "&gt;"); // sanitize message
+
+
+        google.script.run.submitFormData({ Name: name, Email: email, Message: message });
+
+       
+
+        document.querySelector("#contact-form").innerHTML = "Thank you for contacting us. We will be in touch.";
+
+      });
+
+    </script>
+
+
+    </script>
+
+    <!-- Add Material Design JS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  </body>
+
+</html>
